@@ -1,6 +1,6 @@
 /** \file tanktest.c
-*   \brief The main source file for tanktest
-*   \author
+*   \brief The main source file for tanktest, a basic test/example of using sprites on the Uzebox console
+*   \author Dan MacDonald
 *   \date 2020
 */
 
