@@ -15,10 +15,13 @@
 #include "data/uzeboxlogo_8x8.pic.inc" // these are used to draw the normal uzebox logo
 #include "data/uzeboxlogo_8x8.map.inc" // for the custom intro
 
-uint_least16_t    lastbuttons=0, ///< saves the buttons pressed during the previous frame
-                  joy=0; ///< bitfield used for tracking the buttons pressed during the current frame
 uint_least8_t     player_x = 80, ///< player x position on screen. 0  is far left
 		          player_y = 40; ///< player y position on screen. 0 is top
+		          
+int btnPrev = 0;     // Previous button
+int btnHeld = 0;     // buttons that are held right now
+int btnPressed = 0;  // buttons that were pressed this frame
+int btnReleased = 0; // buttons that were released this frame 
 
 /**
  * \enum state
@@ -92,21 +95,26 @@ void drawIntro(void)
 }
 
 /**
- * \brief Logic for custom intro and processes controller input for skipping intro.
+ * \processes controller input
  */
 void processIntro(void)
-{
-//	player_y = (u8)(100+pgm_read_byte(&(sine32[wave_tick]))); //set ghost height based on sine function
-	player_x++; //move ghost left to right 1 pixel
+{    
+    btnHeld = ReadJoypad(0); //read in our player one joypad input
+    btnPressed = btnHeld & (btnHeld ^ btnPrev);
+    btnReleased = btnPrev & (btnHeld ^ btnPrev);
 
-	//read in our player one joypad input
-	joy=ReadJoypad(0);
-
-	//if player 1 is currently pressing start
-	if((joy&BTN_START) && (joy != lastbuttons))
-	{
-		lastbuttons=joy;
-	}
-	lastbuttons=joy;
+	if(btnHeld & BTN_RIGHT){
+        player_x++;
+    }
+    if(btnHeld & BTN_LEFT){
+        player_x--;
+    }
+    if(btnHeld & BTN_UP){
+        player_y--;
+    }
+    if(btnHeld & BTN_DOWN){
+        player_y++;
+    }
+    btnPrev = btnHeld;
 }
 
