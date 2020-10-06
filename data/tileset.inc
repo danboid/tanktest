@@ -8,8 +8,8 @@
 #define MYSPRITES_WIDTH 5
 #define MYSPRITES_HEIGHT 1
 const char mysprites[] PROGMEM ={
-5,1
-,0x1,0x2,0x3,0x4,0x5};
+1,1
+,0x1};
 
 #define TILESET_SIZE 6
 const char tileset[] PROGMEM={
