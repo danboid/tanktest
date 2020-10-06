@@ -1,6 +1,6 @@
 /** \file tanktest.c
 *   \brief The main source file for tanktest
-*   \author -
+*   \author kivan117 (James Elliott)
 *   \date 2020
 */
 
@@ -11,9 +11,9 @@
 #include <avr/interrupt.h>
 #include <uzebox.h>
 
-#include "data/title_tiles.inc" // menu tiles
-#include "data/ghost_sprites.inc" // all the sprites for the game
-#include "data/tileset.inc" // tank sprites
+#include "data/title_tiles.inc" // menu tiles - NEED
+#include "data/ghost_sprites.inc" // all the sprites for the game - NEED
+#include "data/tileset.inc"
 #include "data/uzeboxlogo_8x8.pic.inc" // these are used to draw the normal uzebox logo
 #include "data/uzeboxlogo_8x8.map.inc" // for the custom intro
 
@@ -23,7 +23,7 @@ uint_least8_t     player_x = 80, ///< player x position on screen. 0  is far lef
 		          player_y = 40; ///< player y position on screen. 0 is top
 
 //const char * player_sprites[9] = {ghost0, ghost1, ghost2, ghost3, ghost4, ghost5, ghost6, ghost7, ghost8}; ///< convenience array for displaying the ghost sprites
-const char * current_sprite; ///< used as an index in player_sprites array to display correct ghost sprite
+//const char * current_sprite; ///< used as an index in player_sprites array to display correct ghost sprite
 
 /**
  * \enum state
@@ -69,7 +69,7 @@ int main(){
  */
 static void initialSetup()
 {
-	SetSpritesTileTable(ghost_sprites); //sets the tiles to be used for our various sprites
+	SetSpritesTileTable(tileset); //sets the tiles to be used for our various sprites
 	SetFontTilesIndex(TITLE_TILES_SIZE); //tiles for the font were included immediately after the include for background tiles
 	                               //therefore this says how many tiles in memory to move forward from the first one
 	                               //in order to find the beginning of the font tiles
@@ -84,7 +84,7 @@ static void initialSetup()
  */
 void initIntro(void)
 {
-	MapSprite2(1, tileset[1], 0); //setup tank for drawing
+	MapSprite2(0, mysprites, 0); //setup blue ghost for drawing
 	player_x = 0; //set ghost to far left
 	player_y = 80; //center ghost vertically
 	SetTileTable(logo_tileset); //setup tiles for drawing uzebox logo
@@ -98,7 +98,7 @@ void drawIntro(void)
 	ClearVram(); //wipe screen each frame
 	//	current_sprite = player_sprites[0]; //change our tracking variable to the correct sprite based on new frame
 	//	MapSprite2(0, current_sprite, 0); //actually reassign the sprites in memory to the correct images
-	MoveSprite(1, player_x, player_y, 3, 3); //position ghost sprite
+	MoveSprite(0, player_x, player_y, 3, 3); //position ghost sprite
 	DrawMap(13,12,map_uzeboxlogo); //draw uzebox logo and name
 }
 
