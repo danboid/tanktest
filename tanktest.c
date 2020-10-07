@@ -95,9 +95,11 @@ void processIntro(void)
     //btnReleased = btnPrev & (btnHeld ^ btnPrev);
 
 	if(btnHeld & BTN_RIGHT){
+        MapSprite2(0,mysprites,0);
         player_x++;
     }
     if(btnHeld & BTN_LEFT){
+        MapSprite2(0,mysprites,SPRITE_FLIP_X);
         player_x--;
     }
     if(btnHeld & BTN_UP){
