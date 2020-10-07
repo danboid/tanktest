@@ -1,5 +1,5 @@
 /** \file tanktest.c
-*   \brief The main source file for tanktest, a basic test/example of using sprites on the Uzebox console
+*   \brief The main source file for tanktest, a basic test of Uzebox sprites
 *   \author Dan MacDonald
 *   \date 2020
 */
@@ -15,7 +15,7 @@
 #include "data/uzeboxlogo_8x8.pic.inc" // these are used to draw the normal uzebox logo
 #include "data/uzeboxlogo_8x8.map.inc" // for the custom intro
 
-uint_least8_t     player_x = 80, ///< player x position on screen. 0  is far left
+uint_least8_t     player_x = 80, ///< player x position on screen. 0 is far left
 		          player_y = 40; ///< player y position on screen. 0 is top
 		          
 int btnPrev = 0;     // Previous button
@@ -23,33 +23,24 @@ int btnHeld = 0;     // buttons that are held right now
 int btnPressed = 0;  // buttons that were pressed this frame
 int btnReleased = 0; // buttons that were released this frame 
 
-/**
- * \enum state
- * \brief Badly titled, but this is for the actual state of the game as a whole. Used for determining which screen to draw, what to do with player input, and what game logic to use.
- */
-typedef enum {INTRO, MAIN_MENU, GAME, LOCAL_SCORES} state;
-state game_state = INTRO; ///< Tracks current state of the game.
-
 void drawIntro(void);
 void processIntro(void);
 void initIntro(void);
 static void initialSetup(void);
 
 /**
- * \brief The main game loop. This just cycles endlessly, it uses the game's 'state' to determine which screen to show and what to do.
+ * \brief The main game loop. This just cycles endlessly.
  */
 int main(){
 	//looping back and forth forever (cards against humanity reference)
 	while(1)
 	{
 		//some basic prep work performed once before our custom intro
-		if(game_state == INTRO)
-		{
 			initialSetup();
 			initIntro();
-		}
+    
 		//perform custom intro
-		while(game_state == INTRO)
+		while(1)
 		{
 			//wait until the next frame
 			WaitVsync(1);
@@ -100,8 +91,8 @@ void drawIntro(void)
 void processIntro(void)
 {    
     btnHeld = ReadJoypad(0); //read in our player one joypad input
-    btnPressed = btnHeld & (btnHeld ^ btnPrev);
-    btnReleased = btnPrev & (btnHeld ^ btnPrev);
+    //btnPressed = btnHeld & (btnHeld ^ btnPrev);
+    //btnReleased = btnPrev & (btnHeld ^ btnPrev);
 
 	if(btnHeld & BTN_RIGHT){
         player_x++;
