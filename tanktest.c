@@ -31,15 +31,12 @@ static void initialSetup(void);
 /**
  * \brief The main game loop. This just cycles endlessly.
  */
-int main(){
-	//looping back and forth forever (cards against humanity reference)
-	while(1)
-	{
-		//some basic prep work performed once before our custom intro
-			initialSetup();
-			initIntro();
-    
-		//perform custom intro
+int main()
+{
+		//some basic prep work
+        initialSetup();
+        initIntro();
+		//Main loop
 		while(1)
 		{
 			//wait until the next frame
@@ -47,8 +44,6 @@ int main(){
 			drawIntro();
 			processIntro();
 		}
-		
-    }
 }
 
 /**
@@ -94,7 +89,7 @@ void processIntro(void)
     //btnPressed = btnHeld & (btnHeld ^ btnPrev);
     //btnReleased = btnPrev & (btnHeld ^ btnPrev);
 
-	if(btnHeld & BTN_RIGHT){
+    if(btnHeld & BTN_RIGHT){
         MapSprite2(0,tankright,0);
         player_x++;
     }
