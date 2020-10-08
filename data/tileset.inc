@@ -5,11 +5,17 @@
  * Tile height: 8px
  * Output format: (null)
  */
-#define MYSPRITES_WIDTH 5
-#define MYSPRITES_HEIGHT 1
-const char mysprites[] PROGMEM ={
+#define TANKRIGHT_WIDTH 1
+#define TANKRIGHT_HEIGHT 1
+const char tankright[] PROGMEM ={
 1,1
 ,0x1};
+
+#define TANKUP_WIDTH 1
+#define TANKUP_HEIGHT 1
+const char tankup[] PROGMEM ={
+1,1
+,0x5};
 
 #define TILESET_SIZE 6
 const char tileset[] PROGMEM={

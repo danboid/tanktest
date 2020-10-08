@@ -69,7 +69,7 @@ static void initialSetup()
  */
 void initIntro(void)
 {
-	MapSprite2(0, mysprites, 0); //setup tank for drawing
+	MapSprite2(0, tankright, 0); //setup tank for drawing
 	player_x = 0; //set tank to far left
 	player_y = 100; //center tank vertically
 	SetTileTable(logo_tileset); //setup tiles for drawing uzebox logo
@@ -95,17 +95,19 @@ void processIntro(void)
     //btnReleased = btnPrev & (btnHeld ^ btnPrev);
 
 	if(btnHeld & BTN_RIGHT){
-        MapSprite2(0,mysprites,0);
+        MapSprite2(0,tankright,0);
         player_x++;
     }
     if(btnHeld & BTN_LEFT){
-        MapSprite2(0,mysprites,SPRITE_FLIP_X);
+        MapSprite2(0,tankright,SPRITE_FLIP_X);
         player_x--;
     }
     if(btnHeld & BTN_UP){
+        MapSprite2(0,tankup,0);
         player_y--;
     }
     if(btnHeld & BTN_DOWN){
+        MapSprite2(0,tankup,SPRITE_FLIP_Y);
         player_y++;
     }
     btnPrev = btnHeld;
